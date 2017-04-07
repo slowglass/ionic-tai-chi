@@ -1,0 +1,12 @@
+page-timer {
+    .yin-yang svg  {
+        animation-name: yin-yang-anticlockwise-spin;
+        animation-duration: 4s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        width: 256px;
+        height: 256px;
+        margin: 0;
+        padding: 0;
+    }
+}
