@@ -19,7 +19,6 @@ export class Data {
   }
 
   constructor(public storage: Storage) {
-    this.storage.remove('timers');
     this.storage.get('timers').then((storedData) => {
       if(storedData) {
         let t = JSON.parse(storedData);
@@ -31,8 +30,7 @@ export class Data {
         });
       } else {
         this.timers = this.defaultTimers();
-        let newData = JSON.stringify(this.timers);
-        this.storage.set('timers', newData);
+        this.saveTimers();
       }
     });
     
@@ -41,6 +39,7 @@ export class Data {
   addTimer(name: string) {
     let size=this.timers.length;
     this.timers.push(TimerConfig.newInstance(name, size, 1, 300, 10, false, "#603060"));
+    this.saveTimers();
   }
 
   getTimers() {
@@ -52,15 +51,17 @@ export class Data {
   }
 
   setTimer(index: number, timer: TimerConfig) {
-    this.timers[index] = timer;  
+    this.timers[index] = timer;
+    this.saveTimers();
   }
 
   deleteTimer(index: number) {
      this.timers.splice(index, 1);
+    this.saveTimers();
   }
  
-  saveTimers(data) {
-    let newData = JSON.stringify(data);
+  saveTimers() {
+    let newData = JSON.stringify(this.timers);
     this.storage.set('timers', newData);
   }
 }

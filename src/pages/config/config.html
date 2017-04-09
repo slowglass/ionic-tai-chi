@@ -34,15 +34,16 @@
 </svg>
 
 <ion-content padding>
-<ion-card *ngFor="let t of getTimers(); let idx=index" (click)="editConfig(idx)">
-    <div class="logo">
-      <img [src]="t.getLogo()" />
-    </div>
-      <div class="card-title">{{t.label}}</div>
-      <div class="card-subtitle">
-        <b># Iterations:</b> {{t.getIterations()}}<br />
-        <b>Iteration Duration:</b> {{t.getDurationAsString()}}<br />
-        <b>Setup Time:</b> {{t.getSetupAsString()}}<br />
+  <ion-card *ngFor="let t of getTimers(); let idx=index"
+    (click)="editConfig(idx)">
+      <div class="logo">
+        <img [src]="t.getLogo()" />
       </div>
-  </ion-card>
+        <div class="card-title">{{t.label}}</div>
+        <div class="card-subtitle">
+          <b># Iterations:</b> {{t.getIterations()}}<br />
+          <b>Iteration Duration:</b> {{t.getDurationAsString()}}<br />
+          <b>Setup Time:</b> {{t.getSetupAsString()}}<br />
+        </div>
+    </ion-card>
 </ion-content>
