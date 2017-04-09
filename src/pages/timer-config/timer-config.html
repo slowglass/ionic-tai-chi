@@ -1,0 +1,87 @@
+<!--
+  Generated template for the TimerConfig page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>TimerConfig</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+<ion-card>
+    <!--<div class="logo">
+      <img [src]="getLogo(index)" />
+    </div>
+      <div class="card-title">{{timer.label}}</div>
+      <div class="card-subtitle">-->
+        
+        <ion-card-header>{{timer.label}}</ion-card-header>
+
+        <div class="item-inner">
+          <div class="input-wrapper">
+            <ion-label class="label"># Iterations</ion-label>
+          </div>
+
+          <ion-badge item-right class="badge">{{timer.iterations}}</ion-badge>
+        </div>
+
+
+        <ion-item>
+            <ion-range [(ngModel)]="timer.iterations" min="1" max="20">
+            <ion-label range-left>1</ion-label>
+            <ion-label range-right>20</ion-label>
+          </ion-range>
+        </ion-item>
+
+        <ion-list>
+          <ion-item>
+            <ion-label>Iteration Duration</ion-label>
+            <ion-select [(ngModel)]="timer.period">
+              <ion-option value="20">20 seconds</ion-option>
+              <ion-option value="30">30 seconds</ion-option>
+              <ion-option value="40">40 seconds</ion-option>
+              <ion-option value="60">1 minute</ion-option>
+              <ion-option value="120">2 minutes</ion-option>
+              <ion-option value="180">3 minutes</ion-option>
+              <ion-option value="240">4 minutes</ion-option>
+              <ion-option value="300">5 minutes</ion-option>
+              <ion-option value="360">6 minutes</ion-option>
+              <ion-option value="480">8 minutes</ion-option>
+              <ion-option value="600">10 minutes</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+
+        <ion-list>
+          <ion-item>
+            <ion-label>Setup Time</ion-label>
+            <ion-select [(ngModel)]="timer.setup.seconds">
+              <ion-option value="0">None</ion-option>
+              <ion-option value="5">5 seconds</ion-option>
+              <ion-option value="10">10 seconds</ion-option>
+              <ion-option value="15">15 seconds</ion-option>
+              <ion-option value="20">20 seconds</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+
+        <ion-list>
+          <ion-item>
+            <ion-label>Setup Occurence</ion-label>
+            <ion-select [(ngModel)]="timer.setup.repeat">
+              <ion-option value="false">At Start Only</ion-option>
+              <ion-option value="true">After Each Iteration</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      <!--</div>-->
+  </ion-card>
+  <button ion-button block color="danger" (click)="deleteConfig()" >Delete Timer</button>
+</ion-content>
