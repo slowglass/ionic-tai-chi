@@ -26,6 +26,8 @@ export class TimerPage {
     public navCtrl: NavController, 
     public navParams: NavParams)
     {
+      this.timer = new TimerConfig();
+      this.current = { state: "STATIONARY", min: 0, sec: 0, iter: -1 };
       this.callbacks.minRollover = () => this.sounds.min.play();
       this.callbacks.iterRollover = () => this.sounds.end.play();
       this.callbacks.finished = () => this.sounds.end.play();
@@ -53,7 +55,6 @@ export class TimerPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TimerPage');
     this.timer = new TimerConfig(this.navParams.get('timer'));
     var c = this.convertHex(this.timer.getColour());
     this.display.fg = this.colToString(c);
@@ -63,7 +64,6 @@ export class TimerPage {
   }
 
   ionViewWillLeave() {
-    console.log('ionViewWillLeave TimerPage');
     this.stop();
   }
 
@@ -89,8 +89,6 @@ export class TimerPage {
     let t:TimerConfig=this.timer;
     this.display.spin = 'running';
     console.log("MultiTimer", "Start");
-    //this.spinner.spinClockwise();
-    //this.lock.lockScreen();
     this.current = { state: "SPINNING", min: 0, sec: t.getSetupTime(), iter: t.getIterations() *2 };
     this.startTimeEvent();
     this.updateDisplay();
@@ -98,10 +96,8 @@ export class TimerPage {
 
   stop() {
     console.log("MultiTimer", "Stop");
-    this.display.spin = 'running';
+    this.display.spin = 'paused';
     this.resetTimeEvent();
-    //this.spinner.stop();
-    //this.lock.unlock();
     this.current = { state: "STATIONARY", min: 0, sec: 0, iter: -1 };
     this.updateDisplay();
   }

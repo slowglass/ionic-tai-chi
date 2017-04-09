@@ -1,4 +1,4 @@
-<ion-menu [content]="content">
+﻿<ion-menu [content]="content">
   <ion-header>
     <ion-toolbar>
       <ion-title>Menu</ion-title>
@@ -14,8 +14,8 @@
     </ion-item-group>
     <ion-item-group>
       <ion-item-divider color="light">Misc</ion-item-divider>
-      <button menuClose ion-item (click)="openPage('Config')">Config</button>
-      <button menuClose ion-item (click)="openPage('About')">About</button>
+      <button menuClose ion-item (click)="openPage(configPage)">Config</button>
+      <button menuClose ion-item (click)="openPage(aboutPage)">About</button>
     </ion-item-group>
   </ion-content>
 </ion-menu>

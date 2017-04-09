@@ -11,7 +11,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Timer</ion-title>
+    <ion-title>Timer : {{timer.getLabel()}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -25,7 +25,7 @@
       </div>
       <div class="yin-yang">
         <svg xmlns="http://www.w3.org/2000/svg"
-          class.animation-play-state="{{display.spin}}" 
+          [style.animation-play-state]="display.spin"
           height="256" width="256" viewBox="-8 -8 16 16" >
           <g>
             <path (click)="toggle()" d="m0-7a3.5 3.5 0 1 1 0 7 3.5 3.5 0 1 0 0 7 7 7 0 1 1 0-14z" attr.fill="{{display.fg}}"/>

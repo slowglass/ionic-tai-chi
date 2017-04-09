@@ -1,11 +1,12 @@
-import { Component, ViewChild } from '@angular/core';
+﻿import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { TimerPage } from '../pages/timer/timer';
-import { TimerConfig } from '../pages/timer/timer-config';
+import { ConfigPage } from '../pages/config/config';
+import { AboutPage } from '../pages/about/about';
 
 import { Data } from '../providers/data';
 
@@ -16,8 +17,9 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
-
-  pages: Array<{title: string, component: any}>;
+  configPage: any = ConfigPage;
+  aboutPage: any = AboutPage;
+  
 
   constructor(
     public platform: Platform, 
@@ -42,13 +44,13 @@ export class MyApp {
   }
 
   openTimer(timer) {
-    TimerConfig.show("MyApp:Menu", timer);
     this.nav.push(TimerPage, { timer: timer });
   }
-  
-  openPage(page) {
-    
+
+  openPage(p) {
+      this.nav.push(p);
   }
+
 }
 
 

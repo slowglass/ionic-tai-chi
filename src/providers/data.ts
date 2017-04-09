@@ -13,32 +13,21 @@ export class Data {
 
   defaultTimers():Array<TimerConfig> {
     let t:Array<TimerConfig> = [];
-    t.push(TimerConfig.newInstance("Standing Stake",   3, 300, 10, false, "#603060"));
-    t.push(TimerConfig.newInstance("Streaches",        8,  60, 10, true , "#603030"));
-    t.push(TimerConfig.newInstance("Tame the Tiger",   4,  30, 10, true , "#606030"));
-    t.push(TimerConfig.newInstance("5 Mins",           1, 300, 10, false, "#306060"));
+    t.push(TimerConfig.newInstance("Standing Stake",   0, 3, 300, 10, false, "#603060"));
+    t.push(TimerConfig.newInstance("Stretching",       1, 8,  60, 10, true , "#603030"));
     return t;
   }
 
-  constructor(public storage: Storage){
-    
-    this.timers = this.defaultTimers();
-    let newData = JSON.stringify(this.timers);
-    this.storage.set('timers', newData);
-    this.timers.forEach((v,i) => {
-      TimerConfig.show("Data:Init", v);
-    }); /* */
-
+  constructor(public storage: Storage) {
+    this.storage.remove('timers');
     this.storage.get('timers').then((storedData) => {
       if(storedData) {
-        TimerConfig.show("Raw:From Store", storedData);
         let t = JSON.parse(storedData);
         this.timers = [];
         t.forEach((v,i) => {
           this.timers.push(new TimerConfig(v));
         });
         this.timers.forEach((v,i) => {
-          TimerConfig.show("Data:From Store", v);
         });
       } else {
         this.timers = this.defaultTimers();
@@ -49,8 +38,25 @@ export class Data {
     
   }
  
+  addTimer(name: string) {
+    let size=this.timers.length;
+    this.timers.push(TimerConfig.newInstance(name, size, 1, 300, 10, false, "#603060"));
+  }
+
   getTimers() {
     return this.timers;  
+  }
+
+  getTimer(index: number) {
+    return this.timers[index];  
+  }
+
+  setTimer(index: number, timer: TimerConfig) {
+    this.timers[index] = timer;  
+  }
+
+  deleteTimer(index: number) {
+     this.timers.splice(index, 1);
   }
  
   saveTimers(data) {

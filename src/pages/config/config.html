@@ -4,15 +4,45 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+<style>
+  .logo  { filter: url(#f2); }
+</style>
+
 <ion-header>
 
   <ion-navbar>
     <ion-title>Config</ion-title>
+
+    <ion-buttons end (click)="addTimer()">
+    <button class="menu-button">
+      <ion-icon large name="add-circle"></ion-icon>
+    </button>
+  </ion-buttons>
   </ion-navbar>
 
 </ion-header>
-
+<svg height="0">
+  <filter id="f1">
+    <feGaussianBlur stdDeviation="1"/>
+  </filter>
+  <filter id="f2">
+    <feColorMatrix values="1 1 1 0   0
+                           1 1 1 0   0
+                           1 1 1 0   0
+                           0 0 0 0.4 0"/>
+  </filter>
+</svg>
 
 <ion-content padding>
-
+<ion-card *ngFor="let t of getTimers(); let idx=index" (click)="editConfig(idx)">
+    <div class="logo">
+      <img [src]="t.getLogo()" />
+    </div>
+      <div class="card-title">{{t.label}}</div>
+      <div class="card-subtitle">
+        <b># Iterations:</b> {{t.getIterations()}}<br />
+        <b>Iteration Duration:</b> {{t.getDurationAsString()}}<br />
+        <b>Setup Time:</b> {{t.getSetupAsString()}}<br />
+      </div>
+  </ion-card>
 </ion-content>
