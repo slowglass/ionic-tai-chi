@@ -8,17 +8,20 @@ import { AboutPage } from '../pages/about/about';
 
 import { TimerPage } from '../pages/timer/timer';
 import { TimerConfigPage } from '../pages/timer-config/timer-config';
+import { SwimmingDragonPage, TabContentPage } from '../pages/swimming-dragon/swimming-dragon';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { IonicStorageModule } from '@ionic/storage';
 import { Data } from '../providers/data';
+import { SoundPlayer } from '../providers/sound-player';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage, ConfigPage, AboutPage,
+    SwimmingDragonPage, TabContentPage,
     TimerPage, TimerConfigPage
   ],
   imports: [
@@ -29,12 +32,14 @@ import { Data } from '../providers/data';
   entryComponents: [
     MyApp,
     HomePage, ConfigPage, AboutPage,
+    SwimmingDragonPage,TabContentPage, 
     TimerPage, TimerConfigPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Data,
+    SoundPlayer,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

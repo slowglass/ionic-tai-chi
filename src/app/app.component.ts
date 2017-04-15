@@ -7,8 +7,10 @@ import { HomePage } from '../pages/home/home';
 import { TimerPage } from '../pages/timer/timer';
 import { ConfigPage } from '../pages/config/config';
 import { AboutPage } from '../pages/about/about';
+import { SwimmingDragonPage } from '../pages/swimming-dragon/swimming-dragon';
 
 import { Data } from '../providers/data';
+import { SoundPlayer } from '../providers/sound-player';
 
 @Component({
   templateUrl: 'app.html'
@@ -19,7 +21,7 @@ export class MyApp {
   rootPage: any = HomePage;
   configPage: any = ConfigPage;
   aboutPage: any = AboutPage;
-  
+  sdPage: any = SwimmingDragonPage;
 
   constructor(
     public platform: Platform, 
