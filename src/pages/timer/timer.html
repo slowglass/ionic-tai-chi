@@ -1,19 +1,7 @@
-<!--
-  Generated template for the Timer page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<style>
-  @keyframes yin-yang-clockwise-spin     {  100% { transform: rotate( 360deg); } }
-  @keyframes yin-yang-anticlockwise-spin {  100% { transform: rotate(-360deg); } }
-</style>'
 <ion-header>
-
   <ion-navbar>
     <ion-title>Timer : {{timer.getLabel()}}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
@@ -23,18 +11,7 @@
       <div style="margin:0; height: 1.1em; font-size: 4em; width: 100%; text-align: center">
       {{display.iteration}}
       </div>
-      <div class="yin-yang">
-        <svg xmlns="http://www.w3.org/2000/svg"
-          [style.animation-play-state]="display.spin"
-          height="256" width="256" viewBox="-8 -8 16 16" >
-          <g>
-            <path (click)="toggle()" d="m0-7a3.5 3.5 0 1 1 0 7 3.5 3.5 0 1 0 0 7 7 7 0 1 1 0-14z" attr.fill="{{display.fg}}"/>
-            <circle (click)="toggle()" cy="-3.5" r="1.1" attr.fill="{{display.bg}}"/>
-            <path (click)="toggle()" d="m0-7a7 7 0 1 1 0 14 3.5 3.5 0 1 1 0-7 3.5 3.5 0 1 0 0-7z" attr.fill="{{display.bg}}" />
-            <circle (click)="toggle()" cy="3.5" r="1.1"  attr.fill="{{display.fg}}"/>
-          </g>
-        </svg>
-      </div>
+      <yin-yang (clickSymbol)="toggle()" [paused]="display.paused"></yin-yang>
       <div style="margin:0; height: 1.1em; font-size: 4em; width: 100%; text-align: center">{{display.time}}</div>
     </div>
   </div>

@@ -1,0 +1,26 @@
+<!--
+  Generated template for the YinYang component.
+
+  See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
+  for more info on Angular 2 Components.
+-->
+<style>
+  @keyframes yin-yang-clockwise-spin     {  100% { transform: rotate( 360deg); } }
+  @keyframes yin-yang-anticlockwise-spin {  100% { transform: rotate(-360deg); } }
+</style>
+
+<div>
+<svg xmlns="http://www.w3.org/2000/svg"
+  class="spin"
+  [style.animation-play-state]="spinner_state"
+  height="256" width="256" viewBox="-8 -8 16 16" >
+  <g>
+    <path (click)="click()" d="m0-7a3.5 3.5 0 1 1 0 7 3.5 3.5 0 1 0 0 7 7 7 0 1 1 0-14z" class="yin"></path>
+    <circle (click)="click()" cy="-3.5" r="1.1" class="yang"></circle>
+    <path (click)="click()" d="m0-7a7 7 0 1 1 0 14 3.5 3.5 0 1 1 0-7 3.5 3.5 0 1 0 0-7z" class="yang"></path>
+    <circle (click)="click()" cy="3.5" r="1.1"  class="yin"></circle>
+  </g>
+</svg>
+</div>
+
+

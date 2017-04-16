@@ -12,6 +12,10 @@ import { SwimmingDragonPage, TabContentPage } from '../pages/swimming-dragon/swi
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { NativeAudio } from '@ionic-native/native-audio';
+import { Device } from '@ionic-native/device';
+
+import {YinYangComponent } from '../components/yin-yang/yin-yang'
 
 import { IonicStorageModule } from '@ionic/storage';
 import { Data } from '../providers/data';
@@ -22,7 +26,8 @@ import { SoundPlayer } from '../providers/sound-player';
     MyApp,
     HomePage, ConfigPage, AboutPage,
     SwimmingDragonPage, TabContentPage,
-    TimerPage, TimerConfigPage
+    TimerPage, TimerConfigPage,
+    YinYangComponent
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -33,11 +38,11 @@ import { SoundPlayer } from '../providers/sound-player';
     MyApp,
     HomePage, ConfigPage, AboutPage,
     SwimmingDragonPage,TabContentPage, 
-    TimerPage, TimerConfigPage
+    TimerPage, TimerConfigPage,
+    YinYangComponent
   ],
   providers: [
-    StatusBar,
-    SplashScreen,
+    StatusBar, SplashScreen, NativeAudio, Device,
     Data,
     SoundPlayer,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

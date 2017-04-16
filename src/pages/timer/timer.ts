@@ -1,15 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { TimerConfig } from './timer-config';
+import { SoundPlayer } from '../../providers/sound-player'
+import { YinYangComponent } from '../../components/yin-yang/yin-yang'
 
-declare var Howl:any; 
-
-/*
-  Generated class for the Timer page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-timer',
   templateUrl: 'timer.html'
@@ -19,21 +13,25 @@ export class TimerPage {
   private current;
   private timerCallbackId = null;
   private callbacks = { minRollover: null, iterRollover: null, finished: null };
-  private sounds = { end: null, min: null };
-
-  public display = { time: "", iteration: "", fg: "#000", bg: "#fff", spin: 'paused'};
+  public display = { time: "", iteration: "", fg: "#000", bg: "#fff", paused: true };
   constructor(
     public navCtrl: NavController, 
-    public navParams: NavParams)
+    public navParams: NavParams,
+    //public spinner: YinYangComponent,
+    public soundPlayer:SoundPlayer)
     {
       this.timer = new TimerConfig();
       this.current = { state: "STATIONARY", min: 0, sec: 0, iter: -1 };
-      this.callbacks.minRollover = () => this.sounds.min.play();
-      this.callbacks.iterRollover = () => this.sounds.end.play();
-      this.callbacks.finished = () => this.sounds.end.play();
 
-      this.sounds.end = new Howl({  src: ["assets/sound/templeBell.wav"]});
-      this.sounds.min = new Howl({  src: ["assets/sound/ting.wav"]});
+      //  Add Sounds to Sound Player
+      this.soundPlayer.addSound("end", "assets/sound/templeBell.wav");
+      this.soundPlayer.addSound("min", "assets/sound/ting.wav");
+      this.soundPlayer.addSound("finished", "assets/sound/ting.wav");
+
+      // Setup Sound play callbacks
+      this.callbacks.minRollover = () => this.soundPlayer.play("min");
+      this.callbacks.iterRollover = () => this.soundPlayer.play("end");
+      this.callbacks.finished = () => this.soundPlayer.play("finished");
     }
 
   colToString(c) {
@@ -87,7 +85,7 @@ export class TimerPage {
   
   start() {
     let t:TimerConfig=this.timer;
-    this.display.spin = 'running';
+    this.display.paused = false;
     console.log("MultiTimer", "Start");
     this.current = { state: "SPINNING", min: 0, sec: t.getSetupTime(), iter: t.getIterations() *2 };
     this.startTimeEvent();
@@ -96,7 +94,7 @@ export class TimerPage {
 
   stop() {
     console.log("MultiTimer", "Stop");
-    this.display.spin = 'paused';
+    this.display.paused = true;
     this.resetTimeEvent();
     this.current = { state: "STATIONARY", min: 0, sec: 0, iter: -1 };
     this.updateDisplay();

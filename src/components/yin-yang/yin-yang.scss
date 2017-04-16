@@ -1,0 +1,16 @@
+yin-yang {
+	$yin-fill:  #CCCCCC;
+	$yang-fill: #444444;
+    svg.spin  {
+         animation-name: yin-yang-clockwise-spin;
+         animation-duration: 4s;
+         animation-timing-function: linear;
+         animation-iteration-count: infinite;
+         width: 256px;
+         height: 256px;
+         margin: 0;
+         padding: 0;
+    }
+    .yin { fill: $yin-fill; }
+    .yang { fill: $yang-fill; }
+}

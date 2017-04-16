@@ -10,7 +10,6 @@ import { AboutPage } from '../pages/about/about';
 import { SwimmingDragonPage } from '../pages/swimming-dragon/swimming-dragon';
 
 import { Data } from '../providers/data';
-import { SoundPlayer } from '../providers/sound-player';
 
 @Component({
   templateUrl: 'app.html'
