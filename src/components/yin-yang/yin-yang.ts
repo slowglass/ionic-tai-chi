@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+﻿import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+declare var RGBColor: any;
 /*
   Generated class for the YinYang component.
 
@@ -11,9 +12,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: 'yin-yang.html'
 })
 export class YinYangComponent {
-  _paused: boolean = false;
-  spinner_state: string = "paused";
+    _paused: boolean = false;
+    _col: string = "";
 
+    yinStyle: any = {};
+    yangStyle: any = {};
+    spinner_state: string = "paused";
+
+  test: boolean = false;
   @Output()
   clickSymbol: EventEmitter<any> = new EventEmitter();
 
@@ -22,10 +28,37 @@ export class YinYangComponent {
   /**  @input {boolean} If true, pause the animation. */
   @Input()
   get paused(): boolean { return this._paused; }
-  set paused(val: boolean) { this._paused = this.isTrueProperty(val); this.load(); }
+  set paused(val: boolean) {
+      this._paused = this.isTrueProperty(val);
+      console.log("Paused set to " + val);
+      this.load();
+  }
+
+  /**  @input {boolean} If true, pause the animation. */
+  @Input()
+  get colour(): string { return this._col; }
+  set colour(val: string) {
+      console.log("Colour set to " + val);
+      this._col = val;
+      this.load();
+  }
+
+
 
   load() {
-    this.spinner_state = (this._paused) ? "paused" : "running";
+      this.spinner_state = (this._paused) ? "paused" : "running";
+      if (this._col != "") {
+          let yinC = new RGBColor(String(this._col));
+          let yangC = new RGBColor(String(this._col));
+          yangC.invert();
+          this.yinStyle = { "fill": yinC.toHex() };
+          this.yangStyle = { "fill": yangC.toHex() };
+          console.log("Yang Colour set to " + yangC.toHex());
+          console.log("Yin Colour set to " + yinC.toHex());
+      } else {
+          this.yinStyle = { };
+          this.yangStyle = { };
+      }
   }
 
   isTrueProperty(val: any): boolean {
