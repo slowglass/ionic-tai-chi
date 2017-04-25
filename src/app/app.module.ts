@@ -3,11 +3,13 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { HomePage } from '../pages/home/home';
-import { ConfigPage } from '../pages/config/config';
-import { AboutPage } from '../pages/about/about';
 
+import { TimersPage } from '../pages/timers/timers';
 import { TimerPage } from '../pages/timer/timer';
 import { TimerConfigPage } from '../pages/timer-config/timer-config';
+
+import { AboutPage } from '../pages/about/about';
+
 import { SwimmingDragonPage, TabContentPage } from '../pages/swimming-dragon/swimming-dragon';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -24,7 +26,7 @@ import { SoundPlayer } from '../providers/sound-player';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage, ConfigPage, AboutPage,
+    HomePage, TimersPage, AboutPage,
     SwimmingDragonPage, TabContentPage,
     TimerPage, TimerConfigPage,
     YinYangComponent
@@ -36,7 +38,7 @@ import { SoundPlayer } from '../providers/sound-player';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage, ConfigPage, AboutPage,
+    HomePage, TimersPage, AboutPage,
     SwimmingDragonPage,TabContentPage, 
     TimerPage, TimerConfigPage,
     YinYangComponent

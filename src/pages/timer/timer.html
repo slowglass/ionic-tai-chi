@@ -1,9 +1,13 @@
 ﻿<ion-header>
   <ion-navbar>
     <ion-title>Timer : {{timer.getLabel()}}</ion-title>
+    <ion-buttons end (click)="configTimer()">
+      <button class="menu-button">
+        <ion-icon large name="cog"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
-
 
 <ion-content padding>
   <div style="margin:0; height: 400px;">

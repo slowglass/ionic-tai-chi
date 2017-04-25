@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { TimersPage } from '../timers/timers';
 
 /*
   Generated class for the Home page.
@@ -14,10 +15,21 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class HomePage {
 
+  timersPage: any = TimersPage;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
   }
 
+  getLogo(idx) : string { 
+    return "assets/img/stance" +
+      (idx%8).toString() +
+      ".png";
+    }
+
+  openPage(p) {
+      this.navCtrl.push(p);
+  }
 }

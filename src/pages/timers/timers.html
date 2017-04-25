@@ -9,15 +9,13 @@
 </style>
 
 <ion-header>
-
   <ion-navbar>
-    <ion-title>Config</ion-title>
-
+    <ion-title>Timers</ion-title>
     <ion-buttons end (click)="addTimer()">
-    <button class="menu-button">
-      <ion-icon large name="add-circle"></ion-icon>
-    </button>
-  </ion-buttons>
+      <button class="menu-button">
+        <ion-icon large name="add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -35,7 +33,7 @@
 
 <ion-content padding>
   <ion-card *ngFor="let t of getTimers(); let idx=index"
-    (click)="editConfig(idx)">
+    (click)="openTimerPage(idx)">
       <div class="logo">
         <img [src]="t.getLogo()" />
       </div>

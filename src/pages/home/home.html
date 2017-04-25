@@ -1,9 +1,7 @@
-<!--
-  Generated template for the Home page.
+<style>
+  .logo  { filter: url(#hf2); }
+</style>
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
@@ -13,28 +11,24 @@
   </ion-navbar>
 </ion-header>
 
+<svg height="0">
+  <filter id="hf1">
+    <feGaussianBlur stdDeviation="1"/>
+  </filter>
+  <filter id="hf2">
+    <feColorMatrix values="1 1 1 0   0
+                           1 1 1 0   0
+                           1 1 1 0   0
+                           0 0 0 0.4 0"/>
+  </filter>
+</svg>
+
 
 <ion-content padding>
-  <p>Welcome to the 'Tai Chi' App. The aim of this app is to help you with your Tai Chi Practice.
-    It provides the following;</p>
-    <h2>Yang Cheng Fu's 10 Principles</h2>
-    <dl>
-      <dt>虚灵顶劲</dt><dd>Suspend the head from the sky</dd>
-      <dt>含胸拔背</dt><dd>Sink the chest, open the upper back</dd>
-      <dt>松腰</dt><dd>Loosen the waist</dd>
-      <dt>沉肩坠肘</dt><dd>Sink the shoulders, drop the elbows</dd>
-      <dt>分虚实</dt><dd>Distinguish between full and empty</dd>
-      <dt>用意不用力</dt><dd>Use will, not strength</dd>
-      <dt>上下相随</dt><dd>Co-ordinate the upper and lower body</dd>
-      <dt>内外相合</dt><dd>Unify external and internal movements</dd>
-      <dt>相连不断</dt><dd>Unbroken continuity of flow</dd>
-      <dt>动中求静</dt><dd>Seek stillness in movement</dd>
-    </dl>
-
-    <h2>Coming soon</h2>
-    <dl>
-      <dt>Level Monitor</dt>
-      <dd>Monitors how level your hands are. Helps you to improve exersises like Swimming Dragon</dd>
-      <dt>Notes</dt><dd>Place to store you own notes</dd>
-    </dl>
+  <ion-card (click)="openPage(timersPage)">
+      <div class="logo">
+        <img [src]="getLogo(1)" />
+      </div>
+      <div class="card-title">Timers</div>
+    </ion-card>
 </ion-content>

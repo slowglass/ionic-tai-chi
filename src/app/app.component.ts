@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { TimerPage } from '../pages/timer/timer';
-import { ConfigPage } from '../pages/config/config';
+import { TimersPage } from '../pages/timers/timers';
 import { AboutPage } from '../pages/about/about';
 import { SwimmingDragonPage } from '../pages/swimming-dragon/swimming-dragon';
 
@@ -18,7 +18,6 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
-  configPage: any = ConfigPage;
   aboutPage: any = AboutPage;
   sdPage: any = SwimmingDragonPage;
 

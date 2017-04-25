@@ -3,12 +3,15 @@ import { NavController, NavParams } from 'ionic-angular';
 import { TimerConfig } from './timer-config';
 import { SoundPlayer } from '../../providers/sound-player'
 import { YinYangComponent } from '../../components/yin-yang/yin-yang'
+import { TimerConfigPage } from '../timer-config/timer-config'
+import { Data } from '../../providers/data';
 
 @Component({
   selector: 'page-timer',
   templateUrl: 'timer.html'
 })
 export class TimerPage {
+  private index: number;
   private timer: TimerConfig;
   private current;
   private timerCallbackId = null;
@@ -18,7 +21,8 @@ export class TimerPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     //public spinner: YinYangComponent,
-    public soundPlayer:SoundPlayer)
+    public soundPlayer:SoundPlayer,
+    public dataService: Data)
     {
       this.timer = new TimerConfig();
       this.current = { state: "STATIONARY", min: 0, sec: 0, iter: -1 };
@@ -33,6 +37,10 @@ export class TimerPage {
       this.callbacks.iterRollover = () => this.soundPlayer.play("end");
       this.callbacks.finished = () => this.soundPlayer.play("finished");
     }
+
+  configTimer() {
+    this.navCtrl.push(TimerConfigPage, { timer: this.index });
+  }
 
   colToString(c) {
     return "rgb(" + 
@@ -52,8 +60,17 @@ export class TimerPage {
     return { r:255-c.r, b:255-c.b, g:255-c.g};
   }
 
-  ionViewDidLoad() {
-    this.timer = new TimerConfig(this.navParams.get('timer'));
+  ionViewDidEnter() {
+    var c = this.convertHex(this.timer.getColour());
+    this.display.fg = this.colToString(c);
+    this.display.bg = this.colToString(this.yangColour(c));
+    this.display.time = TimerConfig.getTimeAsString(this.timer.getDuration());
+    this.display.iteration = this.timer.getIterations().toString();
+  }
+  
+  ionViewDidLoad() {  
+    this.index = this.navParams.get('timer');
+    this.timer = this.dataService.getTimer(this.index);
     var c = this.convertHex(this.timer.getColour());
     this.display.fg = this.colToString(c);
     this.display.bg = this.colToString(this.yangColour(c));

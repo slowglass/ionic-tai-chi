@@ -32,32 +32,17 @@ export class TimerConfigPage {
         alert.addButton({ text: 'Yes', handler: data => { 
           this.dataService.deleteTimer(this.index); 
           this.index = -1;
-          this.navCtrl.pop(); 
+          let l: number = this.navCtrl.length();
+          this.navCtrl.remove(l-2);
+          this.navCtrl.pop();
         } });
         alert.addButton({ text: 'No', handler: data => { }});
         alert.present();
     }
     ionViewDidLoad() {
-      this.index = Number(this.navParams.get('index'));
-      this.timer = new TimerConfig(this.dataService.getTimer(this.index));
+      this.index = Number(this.navParams.get('timer'));
+      this.timer = this.dataService.getTimer(this.index);
       console.log("ionViewDidLoad Index: "+ this.index.toString());
       TimerConfig.show("ionViewDidLoad", this.timer);
     }
-
-    ionViewCanLeave(): boolean | Promise<boolean> {
-      if (this.index == -1) return true;
-      if (this.timer.equals(this.dataService.getTimer(this.index))) return true;
-
-      return new Promise((resolve: any, reject: any) => {
-        let alert = this.alertCtrl.create({
-          title: 'Save the timer Changes?',
-          message: 'Timer has been changed, do you want to save your changes.'
-        });
-        alert.addButton({ text: 'Yes', handler: data => { this.dataService.setTimer(this.index, this.timer);; resolve(); } });
-        alert.addButton({ text: 'No', handler: data => { resolve(); } });
-        alert.addButton({ text: 'Cancel', role: 'cancel', handler: data => { reject(); } });
-        alert.present();
-      });
-    }
-
 }

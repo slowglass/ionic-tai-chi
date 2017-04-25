@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 
 import { Data } from '../../providers/data';
-import { TimerConfigPage } from '../timer-config/timer-config';
+import { TimerPage } from '../timer/timer';
 /*
   Generated class for the Config page.
 
@@ -10,10 +10,10 @@ import { TimerConfigPage } from '../timer-config/timer-config';
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-config',
-  templateUrl: 'config.html'
+  selector: 'page-timers',
+  templateUrl: 'timers.html'
 })
-export class ConfigPage {
+export class TimersPage {
 
   constructor(
     public navCtrl: NavController,
@@ -40,36 +40,16 @@ export class ConfigPage {
       });
     alert.addInput({name: 'timer', placeholder: 'Timer'});
     alert.addButton({ text: 'Cancel', role: 'cancel', handler: data => { } });
-    alert.addButton({ text: 'Save', handler: data => { this.dataService.addTimer(data.timer); } });
+    alert.addButton({ text: 'Save', handler: data => { 
+      this.dataService.addTimer(data.timer); 
+      let i = this.dataService.getTimers().length;
+      this.navCtrl.push(TimerPage, { timer: i-1, new: true });
+    } });
     alert.present();    
   }
 
-  editConfig(index) {
-    console.log("editConfig : "+ index.toString())
-    this.navCtrl.push(TimerConfigPage, { index: index });
-  }
-
-  onSlideChange	(s) {
-    console.log("onSlideChange: "+s);
-  }
-  ionSlideDidChange	(x) {
-    console.log("ionSlideDidChange: "+ JSON.stringify(x));
-  }
-
-  ionSlideDrag(x) {
-    console.log("ionSlideDrag: "+ JSON.stringify(x));
-  }
-
-  ionSlidePrevEnd(x) {
-    console.log("ionSlidePrevEnd: "+ JSON.stringify(x));
-  }
-
-  ionSlideNextStart(x) {
-    console.log("ionSlideNextStart: "+ JSON.stringify(x));
-  }
-
-  ionSlideNextEnd(x) {
-    console.log("ionSlideNextEnd: "+ JSON.stringify(x));
+  openTimerPage(index) {
+    this.navCtrl.push(TimerPage, { timer: index, new: false });
   }
 
 }
