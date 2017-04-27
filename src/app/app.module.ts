@@ -8,6 +8,10 @@ import { TimersPage } from '../pages/timers/timers';
 import { TimerPage } from '../pages/timer/timer';
 import { TimerConfigPage } from '../pages/timer-config/timer-config';
 
+
+import { FormsPage } from '../pages/forms/forms';
+import { FormPage } from '../pages/form/form';
+
 import { AboutPage } from '../pages/about/about';
 
 import { SwimmingDragonPage, TabContentPage } from '../pages/swimming-dragon/swimming-dragon';
@@ -20,15 +24,17 @@ import { Device } from '@ionic-native/device';
 import {YinYangComponent } from '../components/yin-yang/yin-yang'
 
 import { IonicStorageModule } from '@ionic/storage';
-import { Data } from '../providers/data';
+import { Timers } from '../providers/timers/timers';
+import { Forms } from '../providers/forms';
 import { SoundPlayer } from '../providers/sound-player';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage, TimersPage, AboutPage,
+    HomePage, AboutPage,
     SwimmingDragonPage, TabContentPage,
-    TimerPage, TimerConfigPage,
+    TimersPage, TimerPage, TimerConfigPage,
+    FormsPage, FormPage, 
     YinYangComponent
   ],
   imports: [
@@ -38,14 +44,15 @@ import { SoundPlayer } from '../providers/sound-player';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage, TimersPage, AboutPage,
+    HomePage, AboutPage,
     SwimmingDragonPage,TabContentPage, 
-    TimerPage, TimerConfigPage,
+    TimersPage, TimerPage, TimerConfigPage,
+    FormsPage, FormPage,
     YinYangComponent
   ],
   providers: [
     StatusBar, SplashScreen, NativeAudio, Device,
-    Data,
+    Timers, Forms,
     SoundPlayer,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

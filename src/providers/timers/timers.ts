@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { TimerConfig } from '../pages/timer/timer-config';
+import { TimerConfig } from './config';
 
 @Injectable()
-export class Data {
+export class Timers {
   private timers:Array<TimerConfig>;
 
   defaultTimers():Array<TimerConfig> {
@@ -25,37 +25,37 @@ export class Data {
         });
       } else {
         this.timers = this.defaultTimers();
-        this.saveTimers();
+        this.save();
       }
     });
     
   }
  
-  addTimer(name: string) {
+  add(name: string) {
     let size=this.timers.length;
     this.timers.push(TimerConfig.newInstance(name, size, 1, 300, 10, false, "#603060"));
-    this.saveTimers();
+    this.save();
   }
 
-  getTimers() {
+  getAll() {
     return this.timers;  
   }
 
-  getTimer(index: number) {
+  get(index: number) {
     return this.timers[index];  
   }
 
-  setTimer(index: number, timer: TimerConfig) {
+  set(index: number, timer: TimerConfig) {
     this.timers[index] = timer;
-    this.saveTimers();
+    this.save();
   }
 
-  deleteTimer(index: number) {
+  remove(index: number) {
      this.timers.splice(index, 1);
-    this.saveTimers();
+    this.save();
   }
  
-  saveTimers() {
+  save() {
     let newData = JSON.stringify(this.timers);
     this.storage.set('timers', newData);
   }

@@ -4,12 +4,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { TimerPage } from '../pages/timer/timer';
-import { TimersPage } from '../pages/timers/timers';
+
 import { AboutPage } from '../pages/about/about';
 import { SwimmingDragonPage } from '../pages/swimming-dragon/swimming-dragon';
-
-import { Data } from '../providers/data';
 
 @Component({
   templateUrl: 'app.html'
@@ -24,8 +21,7 @@ export class MyApp {
   constructor(
     public platform: Platform, 
     public statusBar: StatusBar, 
-    public splashScreen: SplashScreen, 
-    public dataService: Data) {
+    public splashScreen: SplashScreen) {
       this.initializeApp();
   }
 
@@ -37,18 +33,6 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
-  }
-
-  getTimers() {
-    return this.dataService.getTimers();
-  }
-
-  openTimer(timer) {
-    this.nav.push(TimerPage, { timer: timer });
-  }
-
-  openPage(p) {
-      this.nav.push(p);
   }
 
 }

@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { TimerConfig } from './timer-config';
+import { TimerConfig } from '../../providers/timers/config';
 import { SoundPlayer } from '../../providers/sound-player'
-import { YinYangComponent } from '../../components/yin-yang/yin-yang'
 import { TimerConfigPage } from '../timer-config/timer-config'
-import { Data } from '../../providers/data';
+import { Timers } from '../../providers/timers/timers';
 
 @Component({
   selector: 'page-timer',
   templateUrl: 'timer.html'
 })
+
 export class TimerPage {
   private index: number;
-  private timer: TimerConfig;
+  private config: TimerConfig;
   private current;
   private timerCallbackId = null;
   private callbacks = { minRollover: null, iterRollover: null, finished: null };
@@ -22,9 +22,9 @@ export class TimerPage {
     public navParams: NavParams,
     //public spinner: YinYangComponent,
     public soundPlayer:SoundPlayer,
-    public dataService: Data)
+    public timers: Timers)
     {
-      this.timer = new TimerConfig();
+      this.config = new TimerConfig();
       this.current = { state: "STATIONARY", min: 0, sec: 0, iter: -1 };
 
       //  Add Sounds to Sound Player
@@ -38,8 +38,24 @@ export class TimerPage {
       this.callbacks.finished = () => this.soundPlayer.play("finished");
     }
 
+
+    /**
+     * Page Listeners
+     */
+     
+  ionViewWillEnter() {
+    this.index = this.navParams.get('timer');
+    this.config = this.timers.get(this.index);
+    var c = this.convertHex(this.config.getColour());
+    this.display.fg = this.colToString(c);
+    this.display.bg = this.colToString(this.yangColour(c));
+    this.display.time = TimerConfig.getTimeAsString(this.config.getDuration());
+    this.display.iteration = this.config.getIterations().toString();
+  }
+
+
   configTimer() {
-    this.navCtrl.push(TimerConfigPage, { timer: this.index });
+    this.navCtrl.push(TimerConfigPage, { timer: this.index, new: false });
   }
 
   colToString(c) {
@@ -60,23 +76,7 @@ export class TimerPage {
     return { r:255-c.r, b:255-c.b, g:255-c.g};
   }
 
-  ionViewDidEnter() {
-    var c = this.convertHex(this.timer.getColour());
-    this.display.fg = this.colToString(c);
-    this.display.bg = this.colToString(this.yangColour(c));
-    this.display.time = TimerConfig.getTimeAsString(this.timer.getDuration());
-    this.display.iteration = this.timer.getIterations().toString();
-  }
-  
-  ionViewDidLoad() {  
-    this.index = this.navParams.get('timer');
-    this.timer = this.dataService.getTimer(this.index);
-    var c = this.convertHex(this.timer.getColour());
-    this.display.fg = this.colToString(c);
-    this.display.bg = this.colToString(this.yangColour(c));
-    this.display.time = TimerConfig.getTimeAsString(this.timer.getDuration());
-    this.display.iteration = this.timer.getIterations().toString();
-  }
+
 
   ionViewWillLeave() {
     this.stop();
@@ -101,7 +101,7 @@ export class TimerPage {
   }
   
   start() {
-    let t:TimerConfig=this.timer;
+    let t:TimerConfig=this.config;
     this.display.paused = false;
     console.log("MultiTimer", "Start");
     this.current = { state: "SPINNING", min: 0, sec: t.getSetupTime(), iter: t.getIterations() *2 };
@@ -118,7 +118,7 @@ export class TimerPage {
   }
 
   tick() {
-    let t=this.timer;
+    let t=this.config;
     var callback=null;
     this.current.sec--;
     if (this.current.sec<0) { 
@@ -151,7 +151,7 @@ export class TimerPage {
   }
   
   updateDisplay() { 
-    let t=this.timer;
+    let t=this.config;
     if (this.current.iter<0) { 
       var rep = t.setupRepeats() ? "+" : "";
       this.display.iteration = t.getIterations().toString();

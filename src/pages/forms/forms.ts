@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { Forms } from '../../providers/forms'
 /*
   Generated class for the Forms page.
 
@@ -13,7 +13,10 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class FormsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(
+      public navCtrl: NavController,
+      public navParams: NavParams,
+      public forms: Forms) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FormsPage');
