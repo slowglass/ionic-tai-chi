@@ -4,6 +4,7 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Timers } from '../../providers/timers/timers';
 import { TimerPage } from '../timer/timer';
 import { TimerConfigPage } from '../timer-config/timer-config'
+import { Utils } from '../../libs/utils'
 
 @Component({
   selector: 'page-timers',
@@ -17,18 +18,11 @@ export class TimersPage {
       public alertCtrl: AlertController,
       public timers: Timers) {}
 
-  getTimers() {
-    return this.timers.getAll();
-  }
+  getTimers() { return this.timers.getAll(); }
 
-  ionViewDidLoad() {
-  }
+  getLogo(i: number): string { return Utils.getLogo(i); }
+  getDurationAsString(d: any): string { return Utils.getDurationAsString(d); }
 
-  getLogo(i: number) : string {
-    let idx = (i%4)+1;
-    return "assets/img/stance"+idx.toString()+".png";
-  }
-  
   addTimer() {
     let alert = this.alertCtrl.create({
         title: 'New Timer?',

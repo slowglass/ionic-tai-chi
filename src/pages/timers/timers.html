@@ -35,12 +35,12 @@
   <ion-card *ngFor="let t of getTimers(); let idx=index"
     (click)="openTimerPage(idx)">
       <div class="logo">
-        <img [src]="t.getLogo()" />
+        <img [src]="getLogo(t.imgNumber)" />
       </div>
         <div class="card-title">{{t.label}}</div>
         <div class="card-subtitle">
-          <b># Iterations:</b> {{t.getIterations()}}<br />
-          <b>Iteration Duration:</b> {{t.getDurationAsString()}}<br />
+          <b># Iterations:</b> {{t.Iterations}}<br />
+          <b>Iteration Duration:</b> {{getDurationAsString(t.period)}}<br />
           <b>Setup Time:</b> {{t.getSetupAsString()}}<br />
         </div>
     </ion-card>
