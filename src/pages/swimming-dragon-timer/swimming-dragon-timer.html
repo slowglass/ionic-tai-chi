@@ -1,0 +1,19 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Swimming Dragon : Timer</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <yin-yang 
+    [topLabel]="topLabel" 
+    [bottomLabel]="bottomLabel"
+    [iterations]="iterations"
+    (onMinuteEnd)="onMinuteEnd()" 
+    (onChange)="onChange($event)"
+  ></yin-yang>
+</ion-content>

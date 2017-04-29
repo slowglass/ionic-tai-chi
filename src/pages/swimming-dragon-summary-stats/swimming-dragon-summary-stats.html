@@ -1,0 +1,44 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Swimming Dragon : Summary</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+        <ion-col><strong>Stats</strong></ion-col>
+        <ion-col><strong>Roll</strong></ion-col>
+        <ion-col><strong>Pitch</strong></ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col><strong>Min</strong></ion-col>
+        <ion-col>{{roll.min}}</ion-col>
+        <ion-col>{{pitch.min}}</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col><strong>Max</strong></ion-col>
+        <ion-col>{{roll.max}}</ion-col>
+        <ion-col>{{pitch.max}}</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col><strong>Avg</strong></ion-col>
+        <ion-col>{{roll.avg}}</ion-col>
+        <ion-col>{{pitch.avg}}</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col><strong>Abs Avg</strong></ion-col>
+        <ion-col>{{roll.aavg}}</ion-col>
+        <ion-col>{{pitch.aavg}}</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col><strong>Std. Dev</strong></ion-col>
+        <ion-col>{{roll.sd}}</ion-col>
+        <ion-col>{{pitch.sd}}</ion-col>
+    </ion-row>
+</ion-grid>
+</ion-content>
