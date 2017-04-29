@@ -4,9 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-
 import { AboutPage } from '../pages/about/about';
-import { SwimmingDragonPage } from '../pages/swimming-dragon/swimming-dragon';
 
 @Component({
   templateUrl: 'app.html'
@@ -16,7 +14,6 @@ export class MyApp {
 
   rootPage: any = HomePage;
   aboutPage: any = AboutPage;
-  sdPage: any = SwimmingDragonPage;
 
   constructor(
     public platform: Platform, 

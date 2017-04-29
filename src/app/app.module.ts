@@ -14,28 +14,33 @@ import { FormPage } from '../pages/form/form';
 
 import { AboutPage } from '../pages/about/about';
 
-import { SwimmingDragonPage, TabContentPage } from '../pages/swimming-dragon/swimming-dragon';
+import { SwimmingDragonPage } from '../pages/swimming-dragon/swimming-dragon';
+import { SwimmingDragonTimerTab } from '../pages/swimming-dragon-timer/swimming-dragon-timer'
+import { SwimmingDragonSummaryStatsTab } from '../pages/swimming-dragon-summary-stats/swimming-dragon-summary-stats'
+import { SwimmingDragonDetailedStatsTab } from '../pages/swimming-dragon-detailed-stats/swimming-dragon-detailed-stats'
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { Device } from '@ionic-native/device';
 
-import {YinYangComponent } from '../components/yin-yang/yin-yang'
+import {YinYangTimer } from '../components/yin-yang/yin-yang'
 
 import { IonicStorageModule } from '@ionic/storage';
 import { Timers } from '../providers/timers/timers';
 import { Forms } from '../providers/forms';
 import { SoundPlayer } from '../providers/sound-player';
-
+import { OrientationStore } from '../providers/orientation-store';
 @NgModule({
   declarations: [
     MyApp,
     HomePage, AboutPage,
-    SwimmingDragonPage, TabContentPage,
+    SwimmingDragonPage, 
+      SwimmingDragonTimerTab, SwimmingDragonSummaryStatsTab, SwimmingDragonDetailedStatsTab,
     TimersPage, TimerPage, TimerConfigPage,
     FormsPage, FormPage, 
-    YinYangComponent
+    YinYangTimer
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -45,15 +50,17 @@ import { SoundPlayer } from '../providers/sound-player';
   entryComponents: [
     MyApp,
     HomePage, AboutPage,
-    SwimmingDragonPage,TabContentPage, 
+    SwimmingDragonPage, 
+      SwimmingDragonTimerTab, SwimmingDragonSummaryStatsTab, SwimmingDragonDetailedStatsTab,
     TimersPage, TimerPage, TimerConfigPage,
     FormsPage, FormPage,
-    YinYangComponent
+    YinYangTimer
   ],
   providers: [
     StatusBar, SplashScreen, NativeAudio, Device,
     Timers, Forms,
     SoundPlayer,
+    OrientationStore,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
