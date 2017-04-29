@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { TimersPage } from '../timers/timers';
 import { FormsPage } from '../forms/forms';
+import { SwimmingDragonPage } from '../swimming-dragon/swimming-dragon';
 
 /*
   Generated class for the Home page.
@@ -18,6 +19,7 @@ export class HomePage {
 
   timersPage: any = TimersPage;
   formsPage: any = FormsPage;
+  sdPage: any = SwimmingDragonPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
