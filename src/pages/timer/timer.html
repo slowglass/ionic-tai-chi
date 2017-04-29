@@ -1,22 +1,20 @@
 ﻿<ion-header>
-  <ion-navbar>
-    <ion-title>Timer : {{config.getLabel()}}</ion-title>
-    <ion-buttons end (click)="configTimer()">
-      <button class="menu-button">
+<ion-navbar>
+  <ion-title>Timer : {{config.label}}</ion-title>
+  <ion-buttons end (click)="configTimer()">
+    <button class="menu-button">
         <ion-icon large name="cog"></ion-icon>
       </button>
-    </ion-buttons>
-  </ion-navbar>
+  </ion-buttons>
+</ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <div style="margin:0; height: 400px;">
-    <div style="margin:auto; width: 256px; height: 256px;">
-      <div style="margin:0; height: 1.1em; font-size: 4em; width: 100%; text-align: center">
-      {{display.iteration}}
-      </div>
-      <yin-yang (clickSymbol)="toggle()" [paused]="display.paused"></yin-yang>
-      <div style="margin:0; height: 1.1em; font-size: 4em; width: 100%; text-align: center">{{display.time}}</div>
-    </div>
-  </div>
+  <yin-yang 
+    [topLabel]="topLabel" 
+    [bottomLabel]="bottomLabel"
+    [iterations]="iterations"
+    (onMinuteEnd)="onMinuteEnd()" 
+    (onChange)="onChange($event)"
+  ></yin-yang>
 </ion-content>
