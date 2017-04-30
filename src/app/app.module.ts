@@ -32,16 +32,21 @@ import { Timers } from '../providers/timers/timers';
 import { Forms } from '../providers/forms';
 import { SoundPlayer } from '../providers/sound-player';
 import { OrientationStore } from '../providers/orientation-store';
+import { Dropbox } from '../providers/dropbox';
+
+import { InAppBrowser } from '@ionic-native/in-app-browser';  
+import { LoginPage } from '../pages/login-page/login-page';
 
 @NgModule({
   declarations: [
-    MyApp,
+    MyApp, LoginPage,
     HomePage, AboutPage,
     SwimmingDragonPage, 
       SwimmingDragonTimerTab, SwimmingDragonSummaryStatsTab, SwimmingDragonDetailedStatsTab,
     TimersPage, TimerPage, TimerConfigPage,
     FormsPage, FormPage, 
     YinYangTimer
+
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -49,7 +54,7 @@ import { OrientationStore } from '../providers/orientation-store';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
+    MyApp, LoginPage,
     HomePage, AboutPage,
     SwimmingDragonPage, 
       SwimmingDragonTimerTab, SwimmingDragonSummaryStatsTab, SwimmingDragonDetailedStatsTab,
@@ -61,6 +66,7 @@ import { OrientationStore } from '../providers/orientation-store';
     Timers, Forms,
     SoundPlayer,
     OrientationStore,
+    Dropbox, InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

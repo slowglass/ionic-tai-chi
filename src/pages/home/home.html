@@ -25,6 +25,19 @@
 
 
 <ion-content padding>
+
+
+  <ion-list>
+    <div *ngFor="let folder of folders">
+      <ion-item *ngIf="folder['.tag'] == 'folder'" detail-push (click)="openFolder(folder.path_lower)">
+        {{folder.name}}
+      </ion-item>
+      <ion-item *ngIf="folder['.tag'] == 'file'">
+        {{folder.name}}
+      </ion-item>
+    </div>
+  </ion-list>
+  
   <ion-card (click)="openPage(timersPage)">
       <div class="logo">
         <img [src]="getLogo(1)" />
