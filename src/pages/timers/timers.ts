@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 
 import { Timers } from '../../providers/timers/timers';
 import { TimerPage } from '../timer/timer';
 import { TimerConfigPage } from '../timer-config/timer-config'
 import { Utils } from '../../libs/utils'
+import { ItemSliding } from 'ionic-angular';
+import { List } from 'ionic-angular';
 
 @Component({
   selector: 'page-timers',
@@ -12,11 +14,19 @@ import { Utils } from '../../libs/utils'
 })
 export class TimersPage {
 
+  private onSlideFired:boolean = false;
+  @ViewChild(List) list: List;
+
   constructor(
     public navCtrl: NavController,
       public navParams: NavParams,
       public alertCtrl: AlertController,
       public timers: Timers) {}
+
+  ionViewWillEnter() {
+    this.onSlideFired = false;
+    this.list.closeSlidingItems();
+  }
 
   getTimers() { return this.timers.getAll(); }
 
@@ -38,8 +48,30 @@ export class TimersPage {
     alert.present();    
   }
 
-  openTimerPage(index) {
-    this.navCtrl.push(TimerPage, { timer: index });
+  onDrag($event:ItemSliding, idx) {
+    let slidingPercent = $event.getSlidingPercent();
+    if(Math.abs(slidingPercent) < 1.7 || this.onSlideFired)
+      return;
+    
+    $event.close();
+    if (this.onSlideFired) return;
+    this.onSlideFired = true;
+    if (slidingPercent > 0)
+      this.removeTimer(idx);
+    else
+      this.configTimer(idx);
+  }
+
+  openTimerPage(idx:number) {
+    this.navCtrl.push(TimerPage, { timer: idx });
+  }
+
+  removeTimer(idx: number) {
+    this.timers.remove(idx);
+  }
+
+  configTimer(idx:number) {
+    this.navCtrl.push(TimerConfigPage, { timer: idx, new: false });
   }
 
 }

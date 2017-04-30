@@ -43,9 +43,9 @@ page-timers {
         top: 52%;
         width: 100%;
     }
-    .menu-button {
-        background-color: transparent;
-        font-size: 20px;
-    }
 
+    ion-item-options .button {
+        padding-left: 45px;
+        padding-right: 45px;
+    }
 }
