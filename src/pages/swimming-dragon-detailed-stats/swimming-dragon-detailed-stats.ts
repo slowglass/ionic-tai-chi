@@ -9,11 +9,6 @@ declare var d3: any;
 })
 
 export class SwimmingDragonDetailedStatsTab {
-  private graph: any;
-  private chart: any;
-  private data: any;
-  private speed: any;
-  private spill: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
