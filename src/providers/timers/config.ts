@@ -1,5 +1,3 @@
-import { Utils } from '../../libs/utils'
-
 export class TimerConfig {
     private static  repeatLabel:string = "seconds each iteration";
     private static  singleRunLabel:string = "seconds at start";
@@ -55,7 +53,7 @@ export class TimerConfig {
     }
 
     getSetupAsString(): string {
-        let l = (this.setup.repeat) ? TimerConfig.repeatLabel : TimerConfig.singleRunLabel;
-        return "" + this.setup.seconds + "seconds each iteration";
+        let label = (this.setup.repeat) ? TimerConfig.repeatLabel : TimerConfig.singleRunLabel;
+        return "" + this.setup.seconds + label;
     }
 }

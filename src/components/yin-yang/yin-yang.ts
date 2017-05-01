@@ -152,7 +152,6 @@ export class YinYangTimer {
 
   private tick() {
     let minRollover:boolean = false;
-    let iterationRollover: boolean = false;
     var eventEmmitter = null;
     this.seconds--;
     if (this.seconds < 0) {
