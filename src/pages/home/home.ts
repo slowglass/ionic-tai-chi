@@ -3,30 +3,37 @@ import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { TimersPage } from '../timers/timers';
 import { FormsPage } from '../forms/forms';
 import { SwimmingDragonPage } from '../swimming-dragon/swimming-dragon';
+import { NotebookPage } from '../notebook/notebook';
+import { AboutPage } from '../about/about';
 
+import { Dialogs } from '@ionic-native/dialogs';
 import { Dropbox } from '../../providers/dropbox';
-/*
-  Generated class for the Home page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
   styles: ['.strikethrough { text-decoration: line-through;}']
 })
-export class HomePage {
 
-  timersPage: any = TimersPage;
+
+export class HomePage {
+  private cards:Array<{name:string, index: number, page:any}> = [];
   formsPage: any = FormsPage;
   sdPage: any = SwimmingDragonPage;
+  notebookPage: any = NotebookPage;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public dropbox: Dropbox,
-    public loadingCtrl: LoadingController) { }
+    public loadingCtrl: LoadingController,
+    private dialogs: Dialogs) {
+      this.cards.push({name:"Timers",          index:0, page: TimersPage });
+      this.cards.push({name:"Forms",           index:1, page: FormsPage });
+      this.cards.push({name:"Swimming Dragon", index:2, page: SwimmingDragonPage });
+      this.cards.push({name:"Notebook",        index:3, page: NotebookPage });
+      this.cards.push({name:"About",           index:4, page: AboutPage });
+     }
 
   getLogo(idx): string {
     return "assets/img/stance" +
@@ -38,78 +45,4 @@ export class HomePage {
     this.navCtrl.push(p);
   }
 
-  /**
-   * TEST CODE
-   */
-
-  depth: number = 0;
-  folders: any;
-
-  ionViewDidLoad() {
-    this.folders = [];
- 
-    let loading = this.loadingCtrl.create({
-      content: 'Syncing from Dropbox...'
-    });
- 
-    loading.present();
- 
-    this.dropbox.getFolders().subscribe(data => {
-      this.folders = data.entries;
-      loading.dismiss();
-    }, (err) => {
-      console.log(err);
-    });
-  }
-
-  ionViewDidEnter(){
-    let loading = this.loadingCtrl.create({
-      content: 'Syncing from Dropbox...'
-    });
-  
-    loading.present();
-  
-    this.dropbox.getFolders().subscribe(data => {
-      this.folders = data.entries;
-      loading.dismiss();
-    }, (err) => {
-      console.log(err);
-    });
-  }
-
-  openFolder(path) {
-
-    let loading = this.loadingCtrl.create({
-      content: 'Syncing from Dropbox...'
-    });
-
-    loading.present(loading);
-
-    this.dropbox.getFolders(path).subscribe(data => {
-      this.folders = data.entries;
-      this.depth++;
-      loading.dismiss();
-    }, err => {
-      console.log(err);
-    });
-
-  }
-
-
-  goBack() {
-    let loading = this.loadingCtrl.create({
-      content: 'Syncing from Dropbox...'
-    });
-
-    loading.present(loading);
-
-    this.dropbox.goBackFolder().subscribe(data => {
-      this.folders = data.entries;
-      this.depth--;
-      loading.dismiss();
-    }, err => {
-      console.log(err);
-    });
-
-  }
 }
