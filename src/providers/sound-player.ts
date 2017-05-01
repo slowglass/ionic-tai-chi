@@ -21,6 +21,7 @@ export class SoundPlayerNative {
 			(res) => { this.playing[name] = false; },
 			(err) => { this.playing[name] = false; });
 	}
+	desc() { return "Ionic2 Native Sound Player"; }
 }
 
 export class SoundPlayerHTML5 {
@@ -30,7 +31,6 @@ export class SoundPlayerHTML5 {
 	msg(name: string, result: string) { console.log("HTML5 Sound " + name + " " + result); }
 	soundPlaying(name: string, status: boolean) { this.playing[name] = status; }
 	addSound(name: string, url: string) {
-		var self = this;
 		this.sounds[name] = new Howl({
 			src: [url],
 			onload: () => this.msg(name, 'Loaded'),
@@ -43,6 +43,7 @@ export class SoundPlayerHTML5 {
 		this.playing[name] = true;
 		this.sounds[name].play();
 	}
+	desc() { return "HTML5 (Howl) Sound Player"; }
 }
 
 @Injectable()
@@ -60,5 +61,6 @@ export class SoundPlayer {
 
   addSound(name: string, url: string) { this.player.addSound(name, url); }
   play(name: string) { this.player.play(name); }
+  desc() { return this.player.desc(); }
 }
 
