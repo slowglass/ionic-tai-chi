@@ -1,0 +1,17 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Notes</ion-title>
+    <ion-buttons end>
+      <button class="menu-button"><ion-icon large name="create"></ion-icon></button>
+      <button class="menu-button"><ion-icon large name="document"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <!--<ion-textarea placeholder="Enter a description" fz-elastic readonly [(ngModel)]="text"></ion-textarea> --> 
+  <div [innerHTML]="md"></div>>
+</ion-content>
