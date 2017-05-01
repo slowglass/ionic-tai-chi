@@ -3,8 +3,8 @@
   <ion-navbar>
     <ion-title>Notes</ion-title>
     <ion-buttons end>
-      <button class="menu-button"><ion-icon large name="create"></ion-icon></button>
-      <button class="menu-button"><ion-icon large name="document"></ion-icon></button>
+      <button *ngIf="showMarkdown" class="menu-button"><ion-icon large name="create" (click)="edit(true)"></ion-icon></button>
+      <button *ngIf="!showMarkdown" class="menu-button"><ion-icon large name="document" (click)="edit(false)"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
 
@@ -12,6 +12,6 @@
 
 
 <ion-content padding>
-  <!--<ion-textarea placeholder="Enter a description" fz-elastic readonly [(ngModel)]="text"></ion-textarea> --> 
-  <div [innerHTML]="md"></div>>
+  <div *ngIf="showMarkdown" [innerHTML]="md"></div>
+  <ion-textarea *ngIf="!showMarkdown" placeholder="Enter a description" fz-elastic readonly [(ngModel)]="text"></ion-textarea>
 </ion-content>

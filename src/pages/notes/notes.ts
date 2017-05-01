@@ -10,6 +10,7 @@ declare var micromarkdown:any;
   templateUrl: 'notes.html'
 })
 export class NotesPage {
+  private showMarkdown:boolean = true;
   private text:string = "Need to load";
   private md:string;
   constructor(
@@ -41,6 +42,8 @@ export class NotesPage {
       
   }
   
+  edit(flag) { this.showMarkdown = !flag; }
+
   open(path) {
     let loading = this.loadingCtrl.create({ content: 'Syncing from Dropbox...' });
 
