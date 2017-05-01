@@ -27,7 +27,7 @@
 <ion-content padding>
   <ion-list>
 
-    <ion-item-sliding class="clearAtStart" *ngFor="let t of getTimers(); let idx=index"  (ionDrag)='onDrag($event, idx)'>
+    <ion-item-sliding *ngFor="let t of getTimers(); let idx=index"  (ionDrag)='onDrag($event, idx)'>
       <ion-item>
         <ion-card (click)="openTimerPage(idx)">
           <div class="logo">
