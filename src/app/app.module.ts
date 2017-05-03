@@ -50,6 +50,7 @@ import { Forms } from '../providers/forms';
 import { SoundPlayer } from '../providers/sound-player';
 import { OrientationStore } from '../providers/orientation-store';
 import { Dropbox } from '../providers/dropbox';
+import { NoteReferenceStore } from '../providers/notes/notebook';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,7 @@ import { Dropbox } from '../providers/dropbox';
   providers: [
     AppVersion, Device, Dialogs, InAppBrowser,
     NativeAudio, SplashScreen, StatusBar,
-    Timers, Forms,
+    Timers, Forms, NoteReferenceStore,
     SoundPlayer,
     OrientationStore,
     Dropbox, 

@@ -4,6 +4,8 @@ import { NotesPage } from '../notes/notes';
 import { Dialogs } from '@ionic-native/dialogs';
 import { Dropbox } from '../../providers/dropbox';
 
+import { NoteReferenceStore } from '../../providers/notes/notebook';
+
 @Component({
   selector: 'page-notebook',
   templateUrl: 'notebook.html'
@@ -11,41 +13,52 @@ import { Dropbox } from '../../providers/dropbox';
 
 export class NotebookPage {
   constructor(
+    private noteReferenceStore: NoteReferenceStore,
     public navCtrl: NavController,
     public navParams: NavParams,
     public dropbox: Dropbox,
     public loadingCtrl: LoadingController,
     private dialogs: Dialogs) { }
 
-  depth: number = 0;
   files: Array<any>;
 
   ionViewDidLoad() {
     this.files = [];
+    this.noteReferenceStore.readFromLocalStore(
+      () => {
+        console.log("Step4a");
+        let l = this.noteReferenceStore.getNotes("");
+        console.log("Path(/):" + JSON.stringify(l));
+        l = this.noteReferenceStore.getNotes("/work");
+        console.log("Path(/work):" + JSON.stringify(l));
+      }
+    );
   }
 
-  dropboxLogin() {
-      if (this.dropbox.isLoggedIn()) return;
+  dropboxLogin(notebook) {
+      if (this.dropbox.isLoggedIn()) 
+        this.readFolderData(notebook);
 
       let loading = this.loadingCtrl.create({ content: 'Syncing from Dropbox...' });
       this.dropbox.login().then(
         (success) => { 
           loading.dismiss(); 
           console.log('Logged in'); 
-          this.openFolder("");
+          this.readFolderData(notebook);
         },
-        (err) => {
-          this.dialogs.alert('Hello world')
-            .then(() => loading.dismiss())
-            .catch(e => console.log('Error displaying dialog', e));
-        });
+        (err) => {  });
   }
 
   ionViewDidEnter() {
-      this.dropboxLogin();
+      let notebook = this.navParams.get('notebook');
+      this.dropboxLogin(notebook);
   }
 
   openFolder(path) {
+    this.navCtrl.push(NotebookPage, {notebook: path});
+  }
+
+  readFolderData(path) {
     let loading = this.loadingCtrl.create({
       content: 'Syncing from Dropbox...'
     });
@@ -54,13 +67,9 @@ export class NotebookPage {
     this.dropbox.getFolders(path).subscribe(
       (data) => {
         this.files = data.entries;
-        this.depth++;
         loading.dismiss();
       }, 
-      (err) => { 
-        loading.dismiss();
-        console.log(err); 
-      }
+      (err) => { loading.dismiss(); }
     );
   }
 
@@ -70,20 +79,4 @@ export class NotebookPage {
     this.navCtrl.push(NotesPage, { note: file.path_lower });
   }
 
-  goBack() {
-    let loading = this.loadingCtrl.create({
-      content: 'Syncing from Dropbox...'
-    });
-
-    loading.present(loading);
-
-    this.dropbox.goBackFolder().subscribe(data => {
-      this.files = data.entries;
-      this.depth--;
-      loading.dismiss();
-    }, err => {
-      console.log(err);
-    });
-
-  }
 }

@@ -102,36 +102,48 @@ export class Dropbox {
   }
   
   getFolders(path?) {
-
     let headers = new Headers();
-
     headers.append('Authorization', 'Bearer ' + this.accessToken);
     headers.append('Content-Type', 'application/json');
 
     let folderPath;
 
     if (typeof (path) == "undefined" || !path) {
-
-      folderPath = {
-        path: ""
-      };
-
+      folderPath = {  path: "" };
     } else {
-
-      folderPath = {
-        path: path
-      };
-
+      folderPath = { path: path };
       if (this.folderHistory[this.folderHistory.length - 1] != path) {
         this.folderHistory.push(path);
       }
-
     }
 
     return this.http.post('https://api.dropboxapi.com/2/files/list_folder', JSON.stringify(folderPath), { headers: headers })
       .map(res => res.json());
 
   }
+
+  getAllFolders(cursor) {
+    let headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + this.accessToken);
+    headers.append('Content-Type', 'application/json');
+    let url="";
+    let data = {};
+    if (cursor == null)
+    {
+      url="https://api.dropboxapi.com/2/files/list_folder";
+      data = {path:"",recursive:true, include_deleted: true, include_media_info: true};
+    }
+    else
+    {
+      url = "https://api.dropboxapi.com/2/files/list_folder/continue";
+      data = { cursor: cursor };
+    }
+    
+    return this.http.post(url, JSON.stringify(data), { headers: headers })
+      .map(res => res.json());
+
+  }
+
 
   goBackFolder() {
 

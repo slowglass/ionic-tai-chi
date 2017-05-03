@@ -13,5 +13,5 @@
 
 <ion-content padding>
   <div *ngIf="showMarkdown" [innerHTML]="md"></div>
-  <ion-textarea *ngIf="!showMarkdown" placeholder="Enter a description" fz-elastic readonly [(ngModel)]="text"></ion-textarea>
+  <ion-textarea *ngIf="!showMarkdown" placeholder="Enter a description" fz-elastic [(ngModel)]="text"></ion-textarea>
 </ion-content>

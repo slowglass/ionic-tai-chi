@@ -35,7 +35,7 @@ export class SoundPlayerHTML5 {
 			src: [url],
 			onload: () => this.msg(name, 'Loaded'),
 			onloaderr: () => this.msg(name, 'Failed to Load!!'),
-			onend: () => this.soundPlaying(name, true)
+			onend: () => this.soundPlaying(name, false)
 		});
 	}
 	play(name: string) {
